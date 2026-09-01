@@ -1,0 +1,1066 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>StudyBuddy - Homework Helper</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f3f6fb;
+    color: #182033;
+    min-height: 100vh;
+}
+
+header {
+    background: linear-gradient(135deg, #5b4bdb, #7b5cff);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    font-size: 40px;
+    margin-bottom: 8px;
+}
+
+header p {
+    font-size: 18px;
+}
+
+.container {
+    max-width: 950px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+select,
+textarea,
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d5d9e2;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+select:focus,
+textarea:focus,
+input:focus {
+    outline: 2px solid #5b4bdb;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 13px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ask {
+    background: #5b4bdb;
+    color: white;
+    flex: 1;
+}
+
+.ask:hover {
+    background: #4939c7;
+}
+
+.clear {
+    background: #e8ebf2;
+}
+
+.examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.example {
+    background: #eef0ff;
+    color: #5b4bdb;
+}
+
+.answer {
+    display: none;
+    background: #f8f8ff;
+    border-left: 5px solid #5b4bdb;
+    padding: 20px;
+    border-radius: 10px;
+    line-height: 1.7;
+}
+
+.answer h3 {
+    color: #5b4bdb;
+    margin-bottom: 12px;
+}
+
+.answer-box {
+    white-space: pre-wrap;
+}
+
+.calculator {
+    background: #f7f7ff;
+}
+
+.calc-result {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.tip {
+    background: #fff8dc;
+    border-left: 5px solid #f0c419;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #687086;
+}
+
+@media(max-width:600px) {
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .buttons button {
+        width: 100%;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>🤖 StudyBuddy</h1>
+
+    <p>Your homework helper</p>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- HOMEWORK SECTION -->
+
+<div class="card">
+
+    <h2>📚 Ask a Homework Question</h2>
+
+
+    <label>Year Level</label>
+
+    <select id="year">
+
+        <option>Year 5</option>
+        <option>Year 6</option>
+        <option>Year 7</option>
+        <option>Year 8</option>
+        <option>Year 9</option>
+        <option>Year 10</option>
+        <option>Year 11</option>
+        <option>Year 12</option>
+
+    </select>
+
+
+    <label>Subject</label>
+
+    <select id="subject">
+
+        <option>Maths</option>
+        <option>Science</option>
+        <option>English</option>
+        <option>History</option>
+        <option>Geography</option>
+        <option>General Knowledge</option>
+
+    </select>
+
+
+    <label>Your Question</label>
+
+    <textarea
+        id="question"
+        placeholder="Type your homework question here..."
+    ></textarea>
+
+
+    <div class="buttons">
+
+        <button class="ask" onclick="answerQuestion()">
+            🤖 Get Answer
+        </button>
+
+        <button class="clear" onclick="clearQuestion()">
+            🗑️ Clear
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- EXAMPLES -->
+
+<div class="card">
+
+    <h2>💡 Example Questions</h2>
+
+    <div class="examples">
+
+        <button class="example"
+        onclick="example('What is 25 times 4?', 'Maths')">
+            🧮 Maths
+        </button>
+
+        <button class="example"
+        onclick="example('What is photosynthesis?', 'Science')">
+            🔬 Science
+        </button>
+
+        <button class="example"
+        onclick="example('What is a metaphor?', 'English')">
+            📖 English
+        </button>
+
+        <button class="example"
+        onclick="example('When did World War 2 end?', 'History')">
+            🏛️ History
+        </button>
+
+        <button class="example"
+        onclick="example('What is the capital of Australia?', 'Geography')">
+            🌎 Geography
+        </button>
+
+        <button class="example"
+        onclick="example('How many planets are in our Solar System?', 'General Knowledge')">
+            🌐 General
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ANSWER -->
+
+<div class="card">
+
+    <div class="answer" id="answer">
+
+        <h3>🤖 StudyBuddy's Answer</h3>
+
+        <div class="answer-box" id="answerText"></div>
+
+    </div>
+
+</div>
+
+
+
+<!-- CALCULATOR -->
+
+<div class="card calculator">
+
+    <h2>🧮 Maths Calculator</h2>
+
+    <p>Enter a calculation such as:</p>
+
+    <p><strong>25 * 4</strong></p>
+    <p><strong>100 / 5</strong></p>
+    <p><strong>12 + 35</strong></p>
+    <p><strong>50 - 18</strong></p>
+
+    <br>
+
+    <input
+        id="calculation"
+        placeholder="Enter calculation..."
+    >
+
+    <button class="ask" onclick="calculate()">
+        Calculate
+    </button>
+
+    <div class="calc-result" id="calcResult"></div>
+
+</div>
+
+
+
+<!-- TIP -->
+
+<div class="card tip">
+
+    <h2>⭐ Study Tip</h2>
+
+    <p>
+        Don't just copy the answer. Read the explanation and
+        try to understand how you can solve the problem yourself.
+    </p>
+
+</div>
+
+
+</div>
+
+
+<footer>
+
+    StudyBuddy © 2026
+
+</footer>
+
+
+
+<script>
+
+
+/* =========================
+   HOMEWORK ANSWER SYSTEM
+   ========================= */
+
+function answerQuestion() {
+
+    const question =
+        document.getElementById("question")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const subject =
+        document.getElementById("subject").value;
+
+    const year =
+        document.getElementById("year").value;
+
+    const answer =
+        document.getElementById("answer");
+
+    const answerText =
+        document.getElementById("answerText");
+
+
+    if(question === "") {
+
+        alert("Please enter a question first!");
+
+        return;
+
+    }
+
+
+    let result = "";
+
+
+    /* =====================
+       MATHS
+       ===================== */
+
+    if(subject === "Maths") {
+
+
+        if(
+            question.includes("25") &&
+            question.includes("4")
+        ) {
+
+            result =
+`Answer: 100
+
+25 × 4 = 100
+
+Step 1:
+Multiply 25 by 4.
+
+Step 2:
+25 × 4 = 100.
+
+So the answer is 100.`;
+
+        }
+
+
+        else if(
+            question.includes("area") &&
+            question.includes("rectangle")
+        ) {
+
+            result =
+`To find the area of a rectangle:
+
+Area = length × width
+
+For example:
+
+Length = 10
+Width = 5
+
+Area = 10 × 5
+Area = 50 square units.`;
+
+        }
+
+
+        else if(
+            question.includes("perimeter")
+        ) {
+
+            result =
+`The perimeter is the distance around the outside of a shape.
+
+For a rectangle:
+
+Perimeter = 2 × (length + width)
+
+Example:
+
+Length = 10
+Width = 5
+
+Perimeter = 2 × (10 + 5)
+Perimeter = 30 units.`;
+
+        }
+
+
+        else if(
+            question.includes("fraction")
+        ) {
+
+            result =
+`Fractions represent parts of a whole.
+
+For example:
+
+1/2 means one part out of two equal parts.
+
+1/4 means one part out of four equal parts.
+
+When adding fractions, make sure they have the same denominator.`;
+
+        }
+
+
+        else if(
+            question.includes("percent")
+        ) {
+
+            result =
+`A percentage means "out of 100".
+
+For example:
+
+50% = 50/100 = 0.5
+
+25% = 25/100 = 0.25
+
+10% = 10/100 = 0.10`;
+
+        }
+
+
+        else {
+
+            result =
+`I don't have a built-in answer for that Maths question yet.
+
+Try using the Maths Calculator below, or try asking something like:
+
+"What is 25 times 4?"
+
+"What is the area of a rectangle?"
+
+"What is the perimeter of a rectangle?"
+
+"What is a fraction?"
+
+"What is a percentage?"`;
+
+        }
+
+    }
+
+
+
+    /* =====================
+       SCIENCE
+       ===================== */
+
+    else if(subject === "Science") {
+
+
+        if(
+            question.includes("photosynthesis")
+        ) {
+
+            result =
+`Photosynthesis is the process plants use to make food.
+
+Plants use:
+
+☀️ Sunlight
+💧 Water
+🌱 Carbon dioxide
+
+They produce:
+
+🍃 Glucose
+💨 Oxygen
+
+Photosynthesis mainly happens in the leaves of plants.`;
+
+        }
+
+
+        else if(
+            question.includes("gravity")
+        ) {
+
+            result =
+`Gravity is a force that pulls objects toward each other.
+
+On Earth, gravity pulls objects toward the ground.
+
+Gravity is also what keeps planets moving around the Sun.`;
+
+        }
+
+
+        else if(
+            question.includes("solar system") ||
+            question.includes("planets")
+        ) {
+
+            result =
+`Our Solar System has eight planets.
+
+From the Sun they are:
+
+1. Mercury
+2. Venus
+3. Earth
+4. Mars
+5. Jupiter
+6. Saturn
+7. Uranus
+8. Neptune`;
+
+        }
+
+
+        else if(
+            question.includes("water cycle")
+        ) {
+
+            result =
+`The water cycle describes how water moves around Earth.
+
+The main stages are:
+
+1. Evaporation
+2. Condensation
+3. Precipitation
+4. Collection
+
+The Sun provides much of the energy that drives the cycle.`;
+
+        }
+
+
+        else {
+
+            result =
+`I don't have a built-in answer for that Science question yet.
+
+Try questions about:
+
+• Photosynthesis
+• Gravity
+• The Solar System
+• The water cycle`;
+
+        }
+
+    }
+
+
+
+    /* =====================
+       ENGLISH
+       ===================== */
+
+    else if(subject === "English") {
+
+
+        if(
+            question.includes("metaphor")
+        ) {
+
+            result =
+`A metaphor is a comparison between two different things without using "like" or "as".
+
+Example:
+
+"The classroom was a zoo."
+
+This does not mean the classroom was actually a zoo. It compares the classroom to a zoo to describe how noisy or chaotic it was.`;
+
+        }
+
+
+        else if(
+            question.includes("simile")
+        ) {
+
+            result =
+`A simile compares two things using words such as "like" or "as".
+
+Example:
+
+"She ran like the wind."
+
+The comparison helps the reader imagine that she ran very quickly.`;
+
+        }
+
+
+        else if(
+            question.includes("noun")
+        ) {
+
+            result =
+`A noun is a word that names a person, place, thing or idea.
+
+Examples:
+
+Person: teacher
+Place: Australia
+Thing: basketball
+Idea: happiness`;
+
+        }
+
+
+        else if(
+            question.includes("verb")
+        ) {
+
+            result =
+`A verb is a word that describes an action or state.
+
+Examples:
+
+run
+jump
+think
+write
+is
+are`;
+
+        }
+
+
+        else {
+
+            result =
+`I don't have a built-in answer for that English question yet.
+
+Try:
+
+• What is a metaphor?
+• What is a simile?
+• What is a noun?
+• What is a verb?`;
+
+        }
+
+    }
+
+
+
+    /* =====================
+       HISTORY
+       ===================== */
+
+    else if(subject === "History") {
+
+
+        if(
+            question.includes("world war 2") ||
+            question.includes("ww2")
+        ) {
+
+            result =
+`World War 2 ended in 1945.
+
+The war lasted from 1939 to 1945.
+
+It involved many countries around the world and was one of the largest conflicts in history.`;
+
+        }
+
+
+        else if(
+            question.includes("world war 1") ||
+            question.includes("ww1")
+        ) {
+
+            result =
+`World War 1 took place from 1914 to 1918.
+
+It involved major alliances and countries in Europe and other parts of the world.
+
+The assassination of Archduke Franz Ferdinand in 1914 was an important event that helped trigger the war.`;
+
+        }
+
+
+        else if(
+            question.includes("egypt") ||
+            question.includes("pyramid")
+        ) {
+
+            result =
+`Ancient Egypt was one of the major civilisations of the ancient world.
+
+The ancient Egyptians built pyramids, developed writing systems and created complex societies along the Nile River.
+
+The pyramids were built thousands of years ago.`;
+
+        }
+
+
+        else {
+
+            result =
+`I don't have a built-in answer for that History question yet.
+
+Try:
+
+• When did World War 1 happen?
+• When did World War 2 end?
+• What were the pyramids?
+• What was Ancient Egypt?`;
+
+        }
+
+    }
+
+
+
+    /* =====================
+       GEOGRAPHY
+       ===================== */
+
+    else if(subject === "Geography") {
+
+
+        if(
+            question.includes("capital") &&
+            question.includes("australia")
+        ) {
+
+            result =
+`The capital city of Australia is Canberra.
+
+Canberra is located in the Australian Capital Territory.`;
+
+        }
+
+
+        else if(
+            question.includes("largest continent")
+        ) {
+
+            result =
+`Asia is the largest continent by land area and population.`;
+
+        }
+
+
+        else if(
+            question.includes("largest ocean")
+        ) {
+
+            result =
+`The Pacific Ocean is the largest ocean on Earth.`;
+
+        }
+
+
+        else if(
+            question.includes("equator")
+        ) {
+
+            result =
+`The Equator is an imaginary line around Earth.
+
+It divides Earth into:
+
+• Northern Hemisphere
+• Southern Hemisphere
+
+It is located at 0° latitude.`;
+
+        }
+
+
+        else {
+
+            result =
+`I don't have a built-in answer for that Geography question yet.
+
+Try:
+
+• What is the capital of Australia?
+• What is the largest continent?
+• What is the largest ocean?
+• What is the Equator?`;
+
+        }
+
+    }
+
+
+
+    /* =====================
+       GENERAL KNOWLEDGE
+       ===================== */
+
+    else {
+
+
+        if(
+            question.includes("planets")
+        ) {
+
+            result =
+`There are eight planets in our Solar System:
+
+Mercury
+Venus
+Earth
+Mars
+Jupiter
+Saturn
+Uranus
+Neptune`;
+
+        }
+
+
+        else if(
+            question.includes("australia")
+        ) {
+
+            result =
+`Australia is both a country and a continent.
+
+Its capital city is Canberra.
+
+Australia is surrounded by the Indian and Pacific Oceans.`;
+
+        }
+
+
+        else {
+
+            result =
+`I don't have a built-in answer for that question yet.
+
+Try asking about:
+
+• The Solar System
+• Australia
+• Science
+• Geography
+• History`;
+
+        }
+
+    }
+
+
+    result =
+"Year level: " + year +
+"\nSubject: " + subject +
+"\n\n" + result;
+
+
+    answerText.textContent = result;
+
+    answer.style.display = "block";
+
+
+    answer.scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+
+/* =========================
+   EXAMPLE BUTTONS
+   ========================= */
+
+function example(text, subject) {
+
+    document.getElementById("question").value = text;
+
+    document.getElementById("subject").value = subject;
+
+    document.getElementById("question").focus();
+
+}
+
+
+
+/* =========================
+   CLEAR
+   ========================= */
+
+function clearQuestion() {
+
+    document.getElementById("question").value = "";
+
+    document.getElementById("answer").style.display = "none";
+
+}
+
+
+
+/* =========================
+   CALCULATOR
+   ========================= */
+
+function calculate() {
+
+    const input =
+        document.getElementById("calculation")
+        .value
+        .trim();
+
+
+    const result =
+        document.getElementById("calcResult");
+
+
+    if(input === "") {
+
+        result.textContent =
+            "Enter a calculation first.";
+
+        return;
+
+    }
+
+
+    /*
+        Only allow numbers and basic
+        maths operators.
+    */
+
+    if(!/^[0-9+\-*/().\s]+$/.test(input)) {
+
+        result.textContent =
+            "Please use numbers and + - * / only.";
+
+        return;
+
+    }
+
+
+    try {
+
+        const answer = Function(
+            '"use strict"; return (' + input + ')'
+        )();
+
+
+        if(!Number.isFinite(answer)) {
+
+            throw new Error();
+
+        }
+
+
+        result.textContent =
+            "Answer: " + answer;
+
+    }
+
+    catch {
+
+        result.textContent =
+            "That calculation could not be solved.";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+```
